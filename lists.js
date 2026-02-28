@@ -68,7 +68,7 @@ var data = {
             "Dark orange",
             "Dark orchid",
             "Dark red",
-            "Darks almon",
+            "Dark salmon",
             "Dark sea green",
             "Dark slate blue",
             "Dark slate grey",
