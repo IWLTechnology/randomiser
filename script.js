@@ -20,6 +20,9 @@ function init() {
     if (localData.changeBg != "true") {
         document.getElementById("changebg").checked = false;
     }
+    if (localData.tts != "true") {
+        document.getElementById("tts").checked = false;
+    }
     button(3);
 }
 
@@ -50,6 +53,8 @@ function button(pressed) {
                 body.style.backgroundImage = "";
                 body.style.backgroundColor = "white";
             }
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance(rand));
             break;
         case 1:
             document.getElementById("set").style.display = "block";
@@ -77,6 +82,11 @@ function button(pressed) {
                 localData.changeBg = "true";
             } else {
                 localData.changeBg = "false";
+            }
+            if (document.getElementById("tts").checked) {
+                localData.tts = "true";
+            } else {
+                localData.tts = "false";
             }
             if (document.getElementById("transitions").checked) {
                 localData.transition = "true";
@@ -113,7 +123,8 @@ function resetStorage() {
         mode: "colour",
         changeBg: "true",
         transition: "true",
-        autoPick: "0"
+        autoPick: "0",
+        tts: "false"
     };
     updateStorage();
 }
