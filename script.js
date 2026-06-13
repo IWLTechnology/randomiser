@@ -1,6 +1,6 @@
 var autoPickTimeout;
 
-var localData = localStorage.getItem("dataStorage");
+var localData = localStorage.getItem("randomiser-storage");
 if (localData == null) {
     resetStorage();
 } else {
@@ -27,7 +27,7 @@ function init() {
 }
 
 function updateStorage() {
-    localStorage.setItem("dataStorage", JSON.stringify(localData));
+    localStorage.setItem("randomiser-storage", JSON.stringify(localData));
 }
 
 function button(pressed) {
@@ -53,8 +53,10 @@ function button(pressed) {
                 body.style.backgroundImage = "";
                 body.style.backgroundColor = "white";
             }
-            window.speechSynthesis.cancel();
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance(rand));
+            if(localData.tts == "true"){            
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(new SpeechSynthesisUtterance(rand));
+            }
             break;
         case 1:
             document.getElementById("set").style.display = "block";
