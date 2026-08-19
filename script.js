@@ -1,3 +1,26 @@
+const $ = (s) => {
+    const el = document.getElementById(s);
+    if (!el) {
+        return null;
+    }
+    el.on = function (e, c) {
+        this.addEventListener(e, c);
+        return this;
+    };
+    return el;
+};
+const _ = (s) => {
+    const els = Array.from(document.querySelectorAll(s));
+    if (els.length === 0) {
+        return [];
+    }
+    els.on = function (e, c) {
+        this.forEach((el) => el.addEventListener(e, c));
+        return this;
+    };
+    return els;
+};
+
 var autoPickTimeout;
 
 var localData = localStorage.getItem("randomiser-storage");
@@ -12,16 +35,16 @@ if (localData == null) {
 }
 
 function init() {
-    document.getElementById("mode").value = localData.mode;
-    document.getElementById("autoPick").value = localData.autoPick;
+    $("mode").value = localData.mode;
+    $("autoPick").value = localData.autoPick;
     if (localData.transition != "true") {
-        document.getElementById("transitions").checked = false;
+        $("transitions").checked = false;
     }
     if (localData.changeBg != "true") {
-        document.getElementById("changebg").checked = false;
+        $("changebg").checked = false;
     }
     if (localData.tts != "true") {
-        document.getElementById("tts").checked = false;
+        $("tts").checked = false;
     }
     button(3);
 }
@@ -31,81 +54,81 @@ function updateStorage() {
 }
 
 function button(pressed) {
-    var res = document.getElementById("result");
-    var body = document.getElementsByTagName("body")[0];
+    var res = $("result");
+    const _b = document.body;
     switch (pressed) {
         case 0:
-            document.getElementById("canChangeBg").style.display = "none";
+            $("info").classList.add("hide");
             var randRes = randomNumber(data[localData.mode].names.length);
             var rand = data[localData.mode].names[randRes];
             res.innerHTML = rand;
             if (localData.changeBg == "true") {
                 if (data[localData.mode].images[randRes] != null) {
                     var x = data[localData.mode].images[randRes];
-                    body.style.backgroundImage = 'url("' + x + '")';
+                    _b.style.backgroundImage = 'url("' + x + '")';
                 } else if (data[localData.mode].colours[randRes] != null) {
-                    body.style.backgroundColor = data[localData.mode].colours[randRes];
+                    _b.style.backgroundColor = data[localData.mode].colours[randRes];
                 } else {
-                    body.style.backgroundImage = "";
-                    body.style.backgroundColor = "white";
+                    _b.style.backgroundImage = "";
+                    _b.style.backgroundColor = "white";
                 }
             } else {
-                body.style.backgroundImage = "";
-                body.style.backgroundColor = "white";
+                _b.style.backgroundImage = "";
+                _b.style.backgroundColor = "white";
             }
-            if(localData.tts == "true"){            
+            if (localData.tts == "true") {
                 window.speechSynthesis.cancel();
                 window.speechSynthesis.speak(new SpeechSynthesisUtterance(rand));
             }
             break;
         case 1:
-            document.getElementById("set").style.display = "block";
+            $("set").classList.remove("hide");
             setTimeout(function () {
-                document.getElementById("set").style.opacity = "1";
+                $("set").classList.remove("o-hide");
             }, 1);
             break;
         case 2:
-            document.getElementById("set").style.opacity = "0";
+            $("set").classList.add("o-hide");
             setTimeout(function () {
-                document.getElementById("set").style.display = "none";
+                $("set").classList.add("hide");
             }, 500);
             break;
         case 3:
-            localData.mode = document.getElementById("mode").value;
-            localData.autoPick = document.getElementById("autoPick").value;
+            localData.mode = $("mode").value;
+            localData.autoPick = $("autoPick").value;
             if (Number(localData.autoPick) > 0) {
             } else {
                 localData.autoPick = "0";
             }
-            body.style.backgroundColor = "";
-            body.style.backgroundImage = "";
-            res.innerHTML = "The result of your random pick will appear here.";
-            if (document.getElementById("changebg").checked) {
+/*            _b.style.backgroundColor = "";
+            _b.style.backgroundImage = "";
+            res.innerHTML = "The result of your random pick will appear here.";*/
+            if ($("changebg").checked) {
                 localData.changeBg = "true";
             } else {
                 localData.changeBg = "false";
             }
-            if (document.getElementById("tts").checked) {
+            if ($("tts").checked) {
                 localData.tts = "true";
             } else {
                 localData.tts = "false";
             }
-            if (document.getElementById("transitions").checked) {
+            if ($("transitions").checked) {
                 localData.transition = "true";
-                document.querySelectorAll("*").forEach((element) => {
+                _("*").forEach((element) => {
                     element.style.transition = "all 0.5s linear";
                 });
             } else {
                 localData.transition = "false";
-                document.querySelectorAll("*").forEach((element) => {
+                _("*").forEach((element) => {
                     element.style.transition = "none";
                 });
             }
             updateStorage();
-            document.getElementById("canChangeBg").style.display = "block";
-            document.getElementById("set").style.opacity = "0";
+            //$("info").classList.remove("hide");
+            $("set").classList.add("o-hide");
             setTimeout(function () {
-                document.getElementById("set").style.display = "none";
+                $("set").classList.add("hide");
             }, 500);
             window.clearInterval(autoPickTimeout);
             if (Number(localData.autoPick) > 0) {
@@ -129,10 +152,6 @@ function resetStorage() {
         tts: "false"
     };
     updateStorage();
-}
-
-function randomNumber(max) {
-    return Math.floor(Math.random() * max);
 }
 
 function randomNumber(max) {

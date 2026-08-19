@@ -27,4 +27,8 @@ A hosted version of the project is available on the website (https://iwltechnolo
 ## Licensing
 This project is licensed under the GNU General Public License v3.0 only. The license can be found in the "LICENSE" file.
 
-The CSS file, "w3.css", and font files may be covered by other licenses.
+Some CSS has been modified from:
+- W3.CSS 5.01 March 11 2026 by Jan Egil and Borge Refsnes
+- normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize
+
+These sections may be covered by another license.

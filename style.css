@@ -1,55 +1,149 @@
-@font-face {
-    font-family: "Alfa Slab One";
-    src: url("./AlfaSlabOne-Regular.ttf") format("truetype");
-}
-@font-face {
-    font-family: "Patrick Hand";
-    src: url("./PatrickHand-Regular.ttf") format("truetype");
-}
 * {
   transition: all 0.5s linear;
 }
-#main {
-  font-family: Patrick Hand;
-  font-size: 150%;
-  padding-left: 25px;
-  padding-right: 25px;
-  background-color: rgba(0, 0, 0, 0.001);
+#main,
+#set > div {
+  padding-left: 2em;
+  padding-right: 2em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
+  width: 95%;
 }
-.fullText {
-  font-family: Alfa Slab One !important;
-  background-color: white !important;
+#set {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 70vw;
+  height: 70vh;
+  z-index: 3;
+  position: absolute;
+  font-size: 0.9em;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 2em;
+}
+#result,
+#set > div > p {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: bolder;
+  font-size: 1.3em;
+}
+#set > div > p {
+  background-color: transparent;
 }
 a {
   color: blue;
 }
 p {
   background-color: white;
+  border-radius: 2em;
 }
-#mode {
+button {
+  background-color: #9c08b7;
+  font: inherit;
+  text-transform: none;
+  -webkit-appearance: button;
+  border: none;
+  display: inline-block;
+  padding: 0.5em 1em;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0.25em;
+  text-wrap: stable;
+  border-radius: 2em;
+  transition: opacity 0s;
+}
+button:active {
+  opacity: 0.5;
+}
+button:hover {
+  box-shadow:
+    0 0.5em 0.2em 0 rgba(0, 0, 0, 0.2),
+    0 0.75em 0.4em 0 rgba(0, 0, 0, 0.19);
+}
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+button:-moz-focusring {
+  outline: 0.1em dotted ButtonText;
+}
+html {
+  font-family: Verdana, sans-serif;
+  font-size: 2vh;
+  line-height: 1.5;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+body {
+  font-family: Verdana, sans-serif;
+  font-size: 2vh;
+  line-height: 1.5;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+select {
   width: 100%;
 }
-#set {
-  background-color: white;
-  width: 100vw;
-  height: 100vh;
-  display: none;
-  z-index: 3;
-  position: absolute;
-  opacity: 0;
+input,
+select {
+  padding: 0.5em 2em;
+  border: none;
+  border-bottom: 0.125em solid #ccc;
+  border-radius: 2vh;
+  transition: opacity 0s;
+  margin: 0;
+  margin-left: 1vh;
+  margin-right: 1vh;
+  font: inherit;
+  overflow: hidden;
+  text-transform: none;
 }
-.centerMe {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  text-align: center;
+input:active,
+select:active,
+textbox:active #main {
+  opacity: 0.5;
 }
-.w3-check {
+[type="checkbox"],
+[type="radio"] {
+  width: 1.6em;
+  height: 1.6em;
+  position: relative;
+  top: 0.4em;
+  padding: 0;
+  display: inline-block;
   margin-right: 0.5em;
 }
-#autoPick {
-  padding: 8px;
-  border: none;
-  border-bottom: 1px solid #ccc;
+.red {
+  background-color: #f44336;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.hide {
+  display: none;
+}
+.o-hide {
+  opacity: 0;
 }
