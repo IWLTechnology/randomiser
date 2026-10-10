@@ -125,7 +125,6 @@ function button(pressed) {
                 });
             }
             updateStorage();
-            //$("info").classList.remove("hide");
             $("set").classList.add("o-hide");
             setTimeout(function () {
                 $("set").classList.add("hide");
